@@ -1,0 +1,31 @@
+:root {
+  --bg:#fafafa; --card:#fff; --accent:#ff4d4d; --text:#222; --muted:#777;
+  --hover:#ffe4e1;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',sans-serif;}
+body{background:var(--bg);color:var(--text);}
+header{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;background:white;box-shadow:0 4px 10px rgba(0,0,0,0.1);position:sticky;top:0;z-index:100;}
+header nav ul{display:flex;gap:15px;}
+header nav ul li a{text-decoration:none;color:var(--text);font-weight:600;}
+.user-buttons button{margin-left:8px;padding:6px 12px;border:none;border-radius:6px;cursor:pointer;background:var(--accent);color:white;font-weight:600;transition:0.3s;}
+.user-buttons button:hover{background:#ff6666;}
+.hero{height:80vh;background:linear-gradient(135deg,#fceabb,#f8b500);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:white;gap:12px;}
+.hero .cta{padding:12px 28px;font-size:1.2rem;border:none;border-radius:12px;background:white;color:var(--accent);cursor:pointer;transition:0.3s;}
+.hero .cta:hover{transform:scale(1.05);}
+.features{display:flex;gap:20px;padding:40px;justify-content:center;flex-wrap:wrap;}
+.feature-card{background:var(--card);padding:20px;border-radius:12px;box-shadow:0 8px 18px rgba(0,0,0,0.06);text-align:center;width:250px;transition:0.3s;}
+.feature-card:hover{transform:scale(1.05);box-shadow:0 12px 25px rgba(0,0,0,0.1);}
+.placeholder-img{background:#e7e7e7;border-radius:10px;height:150px;margin-bottom:12px;display:flex;justify-content:center;align-items:center;font-size:2rem;color:var(--muted);}
+.product-grid, .commission-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;padding:20px;}
+.product-card, .commission-card{background:var(--card);padding:14px;border-radius:12px;box-shadow:0 8px 18px rgba(0,0,0,0.06);text-align:center;transition:0.3s;}
+.product-card:hover, .commission-card:hover{transform:scale(1.03);box-shadow:0 12px 25px rgba(0,0,0,0.1);}
+.product-card button, .commission-card button, #submitReview, #subscribeBtn{margin-top:10px;padding:8px 16px;border:none;border-radius:6px;background:var(--accent);color:white;cursor:pointer;transition:0.3s;}
+.product-card button:hover, .commission-card button:hover,#submitReview:hover,#subscribeBtn:hover{background:#ff6666;}
+.side-nav{position:fixed;top:50%;right:20px;transform:translateY(-50%);background:rgba(255,255,255,0.9);border-radius:12px;padding:10px;box-shadow:0 4px 12px rgba(0,0,0,0.2);z-index:100;}
+.side-nav ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.side-nav ul li a{text-decoration:none;color:var(--text);padding:6px 10px;border-radius:6px;transition:0.3s;}
+.side-nav ul li a:hover,.side-nav ul li a.active{background:var(--accent);color:white;}
+input, textarea{padding:8px;margin:6px 0;border-radius:6px;border:1px solid #ccc;width:100%;}
+textarea{resize:none;}
+footer{background:var(--card);padding:20px;text-align:center;margin-top:40px;}
+.hidden{display:none;}

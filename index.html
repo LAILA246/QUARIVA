@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✨ Magical Boutique ✨</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- SIDE NAV -->
+<nav id="sideNav" class="side-nav">
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#commissions">Commissions</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#newsletter">Newsletter</a></li>
+  </ul>
+</nav>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">✨ Magical Boutique</div>
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#commissions">Commissions</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+    </ul>
+  </nav>
+  <div class="user-buttons">
+    <button id="loginBtn">Login</button>
+    <button id="logoutBtn" class="hidden">Logout</button>
+    <button id="cartBtn">Cart (0)</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <h1>✨ Welcome to Your Dream Boutique ✨</h1>
+  <p>Whimsical wonders for your everyday joy!</p>
+  <button class="cta" id="shopBtn">Shop Products</button>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="features">
+  <div class="feature-card"><div class="placeholder-img">🌟</div><h3>Magic Tees</h3><p>Soft, comfy, and magical!</p></div>
+  <div class="feature-card"><div class="placeholder-img">✨</div><h3>Enchanted Caps</h3><p>Look cute wherever you go!</p></div>
+  <div class="feature-card"><div class="placeholder-img">🎨</div><h3>Art Prints</h3><p>Decorate your space with whimsy!</p></div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <h2>Our Products</h2>
+  <div class="product-grid" id="productGrid"></div>
+</section>
+
+<!-- COMMISSIONS -->
+<section id="commissions">
+  <h2>Art Commissions</h2>
+  <div class="commission-grid" id="commissionGrid"></div>
+  <form id="commissionForm">
+    <input type="email" placeholder="Your Email" required>
+    <input type="text" placeholder="Commission Type" required>
+    <textarea placeholder="Details"></textarea>
+    <input type="number" placeholder="Estimated Budget ($)">
+    <button type="submit">Request Quote</button>
+  </form>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" class="reviews">
+  <h2>What People Say</h2>
+  <div id="reviewList"></div>
+  <input type="text" id="reviewInput" placeholder="Write a review">
+  <button id="submitReview">Submit</button>
+</section>
+
+<!-- NEWSLETTER -->
+<section id="newsletter" class="newsletter">
+  <h2>Stay in the Loop</h2>
+  <p>Get exclusive deals and updates — join our newsletter.</p>
+  <input type="email" id="newsletterEmail" placeholder="Your email">
+  <button id="subscribeBtn">Subscribe</button>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <nav>
+    <ul>
+      <li>Home</li><li>Products</li><li>Commissions</li><li>Contact</li>
+    </ul>
+  </nav>
+  <p>© 2025 Magical Boutique. All rights reserved.</p>
+</footer>
+
+<!-- AUDIO -->
+<audio id="clickSound" src="assets/sounds/click.mp3"></audio>
+<audio id="addSound" src="assets/sounds/add.mp3"></audio>
+
+<script src="app.js"></script>
+</body>
+</html>

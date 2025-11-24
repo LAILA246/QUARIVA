@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>✨ Layla Boutique — Magical UI</title>
   <link rel="stylesheet" href="style.css">
+  
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-auth-compat.js"></script>
 </head>
 <body>
   <!-- SIDE NAV -->
@@ -42,132 +46,14 @@
     </div>
   </header>
 
-  <!-- HERO / SLIDER -->
-  <section id="home" class="hero">
-    <div class="hero-slider" id="heroSlider">
-      <!-- Slide 1 uses your uploaded image path EXACTLY -->
-      <div class="slide active">
-        <img src="/mnt/data/Layla Ui design 702.jpg" alt="Layla hero">
-        <div class="slide-text">
-          <h1>Layla</h1>
-          <p>She is a student in the Rtawahist Darshan, specializing in Theoretical Astrology.</p>
-          <a class="btn-ghost" href="#commissions">Read More</a>
-        </div>
-      </div>
-
-      <!-- Slide 2 & 3 - placeholders (replace images later) -->
-      <div class="slide">
-        <img src="assets/images/slide2-placeholder.jpg" alt="Slide 2">
-        <div class="slide-text">
-          <h1>Dreamy Prints</h1>
-          <p>Limited edition prints — soft hues, vivid magic.</p>
-          <a class="btn-ghost" href="#products">Explore</a>
-        </div>
-      </div>
-
-      <div class="slide">
-        <img src="assets/images/slide3-placeholder.jpg" alt="Slide 3">
-        <div class="slide-text">
-          <h1>Commissioned Artwork</h1>
-          <p>Get your own personalized piece made with love and stardust.</p>
-          <a class="btn-ghost" href="#commissions">Request</a>
-        </div>
-      </div>
-
-      <button class="slide-nav left" id="slidePrev">‹</button>
-      <button class="slide-nav right" id="slideNext">›</button>
-      <div class="dots" id="heroDots"></div>
-    </div>
-  </section>
-
-  <!-- ARTWORK ROW (cards & recent search) -->
-  <section id="artwork" class="artwork-section">
-    <div class="art-left">
-      <h2>Artwork</h2>
-      <div class="art-cards" id="artCards">
-        <!-- JS will inject cards -->
-      </div>
-      <button class="view-more">View More</button>
-    </div>
-
-    <aside class="art-right">
-      <h3>Recent Search</h3>
-      <div class="recent-search" id="recentSearch">
-        <!-- list injected by JS -->
-      </div>
-    </aside>
-  </section>
-
-  <!-- PRODUCTS -->
-  <section id="products" class="products">
-    <h2>Featured Products</h2>
-    <div id="productGrid" class="product-grid">
-      <!-- JS-inserted product cards -->
-    </div>
-  </section>
-
-  <!-- COMMISSIONS -->
-  <section id="commissions" class="commissions">
-    <h2>Art Commissions</h2>
-    <div class="commission-samples" id="commissionSamples">
-      <!-- JS inserts 3 placeholders -->
-    </div>
-
-    <form id="commissionForm" class="commission-form">
-      <input name="email" type="email" placeholder="Your email" required>
-      <select name="type">
-        <option>Portrait</option>
-        <option>Character</option>
-        <option>Illustration</option>
-      </select>
-      <textarea name="details" placeholder="Tell us what you want..." required></textarea>
-      <input name="budget" type="number" placeholder="Budget ($)">
-      <button type="submit" class="cta">Request Quote</button>
-    </form>
-  </section>
-
-  <!-- REVIEWS -->
-  <section id="reviews" class="reviews">
-    <h2>What People Say</h2>
-    <div id="reviewList" class="review-list"></div>
-    <div class="write-review">
-      <input id="reviewAuthor" placeholder="Your name">
-      <input id="reviewText" placeholder="Write a review...">
-      <button id="postReview">Post</button>
-    </div>
-  </section>
-
-  <!-- NEWSLETTER / LEAD MAGNET -->
-  <section id="contact" class="lead-magnet">
-    <h3>Download your freebie</h3>
-    <p>Join our circle for exclusive wallpapers & offers ✨</p>
-    <form id="signupForm" class="signup">
-      <input id="signupEmail" type="email" placeholder="Your email" required>
-      <button type="submit" class="cta">Subscribe</button>
-    </form>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="foot-left">© 2025 Layla Boutique</div>
-    <nav class="foot-nav">
-      <a href="#home">Home</a>
-      <a href="#products">Products</a>
-      <a href="#commissions">Commissions</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </footer>
-
-  <!-- LOGIN MODAL (simple frontend demo) -->
+  <!-- LOGIN MODAL -->
   <dialog id="loginModal" class="modal">
     <form id="loginForm">
       <h3>Welcome back ✨</h3>
       <input name="email" type="email" placeholder="Email" required>
       <input name="password" type="password" placeholder="Password" required>
-      <div class="socials">
+      <div class="oauth-buttons">
         <button type="button" data-provider="google" class="oauth">Continue with Google</button>
-        <button type="button" data-provider="facebook" class="oauth">Continue with Facebook</button>
-        <button type="button" data-provider="apple" class="oauth">Continue with Apple</button>
       </div>
       <div class="modal-actions">
         <button type="submit" class="cta">Login</button>
@@ -176,11 +62,12 @@
     </form>
   </dialog>
 
-  <!-- AUDIO (place files in assets/sounds/) -->
+  <!-- AUDIO -->
   <audio id="sClick" src="assets/sounds/click.mp3"></audio>
   <audio id="sAdd" src="assets/sounds/add.mp3"></audio>
   <audio id="sSpark" src="assets/sounds/sparkle.mp3"></audio>
 
+  <!-- Your JS -->
   <script src="app.js"></script>
 </body>
 </html>

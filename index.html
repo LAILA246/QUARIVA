@@ -1,106 +1,186 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>✨ Magical Boutique ✨</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>✨ Layla Boutique — Magical UI</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<!-- SIDE NAV -->
-<nav id="sideNav" class="side-nav">
-  <ul>
-    <li><a href="#home">Home</a></li>
-    <li><a href="#features">Features</a></li>
-    <li><a href="#products">Products</a></li>
-    <li><a href="#commissions">Commissions</a></li>
-    <li><a href="#reviews">Reviews</a></li>
-    <li><a href="#newsletter">Newsletter</a></li>
-  </ul>
-</nav>
-
-<!-- HEADER -->
-<header>
-  <div class="logo">✨ Magical Boutique</div>
-  <nav>
+  <!-- SIDE NAV -->
+  <nav id="sideNav" class="side-nav">
     <ul>
       <li><a href="#home">Home</a></li>
+      <li><a href="#artwork">Artwork</a></li>
       <li><a href="#products">Products</a></li>
       <li><a href="#commissions">Commissions</a></li>
       <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
-  <div class="user-buttons">
-    <button id="loginBtn">Login</button>
-    <button id="logoutBtn" class="hidden">Logout</button>
-    <button id="cartBtn">Cart (0)</button>
-  </div>
-</header>
 
-<!-- HERO -->
-<section id="home" class="hero">
-  <h1>✨ Welcome to Your Dream Boutique ✨</h1>
-  <p>Whimsical wonders for your everyday joy!</p>
-  <button class="cta" id="shopBtn">Shop Products</button>
-</section>
+  <!-- TOP NAV -->
+  <header class="topbar">
+    <div class="left">
+      <button id="menuToggle" class="icon-btn">☰</button>
+      <div class="logo">Layla Boutique</div>
+    </div>
 
-<!-- FEATURES -->
-<section id="features" class="features">
-  <div class="feature-card"><div class="placeholder-img">🌟</div><h3>Magic Tees</h3><p>Soft, comfy, and magical!</p></div>
-  <div class="feature-card"><div class="placeholder-img">✨</div><h3>Enchanted Caps</h3><p>Look cute wherever you go!</p></div>
-  <div class="feature-card"><div class="placeholder-img">🎨</div><h3>Art Prints</h3><p>Decorate your space with whimsy!</p></div>
-</section>
+    <div class="center">
+      <nav class="top-links">
+        <a href="#home">Home</a>
+        <a href="#artwork">Artwork</a>
+        <a href="#products">Shop</a>
+      </nav>
+    </div>
 
-<!-- PRODUCTS -->
-<section id="products">
-  <h2>Our Products</h2>
-  <div class="product-grid" id="productGrid"></div>
-</section>
+    <div class="right">
+      <button id="searchOpen" class="icon-btn">🔍</button>
+      <button id="loginBtn" class="pill">Log in</button>
+      <button id="signupBtn" class="pill filled">Sign up</button>
+      <button id="cartBtn" class="icon-btn">🛒 <span id="cartCount">0</span></button>
+    </div>
+  </header>
 
-<!-- COMMISSIONS -->
-<section id="commissions">
-  <h2>Art Commissions</h2>
-  <div class="commission-grid" id="commissionGrid"></div>
-  <form id="commissionForm">
-    <input type="email" placeholder="Your Email" required>
-    <input type="text" placeholder="Commission Type" required>
-    <textarea placeholder="Details"></textarea>
-    <input type="number" placeholder="Estimated Budget ($)">
-    <button type="submit">Request Quote</button>
-  </form>
-</section>
+  <!-- HERO / SLIDER -->
+  <section id="home" class="hero">
+    <div class="hero-slider" id="heroSlider">
+      <!-- Slide 1 uses your uploaded image path EXACTLY -->
+      <div class="slide active">
+        <img src="/mnt/data/Layla Ui design 702.jpg" alt="Layla hero">
+        <div class="slide-text">
+          <h1>Layla</h1>
+          <p>She is a student in the Rtawahist Darshan, specializing in Theoretical Astrology.</p>
+          <a class="btn-ghost" href="#commissions">Read More</a>
+        </div>
+      </div>
 
-<!-- REVIEWS -->
-<section id="reviews" class="reviews">
-  <h2>What People Say</h2>
-  <div id="reviewList"></div>
-  <input type="text" id="reviewInput" placeholder="Write a review">
-  <button id="submitReview">Submit</button>
-</section>
+      <!-- Slide 2 & 3 - placeholders (replace images later) -->
+      <div class="slide">
+        <img src="assets/images/slide2-placeholder.jpg" alt="Slide 2">
+        <div class="slide-text">
+          <h1>Dreamy Prints</h1>
+          <p>Limited edition prints — soft hues, vivid magic.</p>
+          <a class="btn-ghost" href="#products">Explore</a>
+        </div>
+      </div>
 
-<!-- NEWSLETTER -->
-<section id="newsletter" class="newsletter">
-  <h2>Stay in the Loop</h2>
-  <p>Get exclusive deals and updates — join our newsletter.</p>
-  <input type="email" id="newsletterEmail" placeholder="Your email">
-  <button id="subscribeBtn">Subscribe</button>
-</section>
+      <div class="slide">
+        <img src="assets/images/slide3-placeholder.jpg" alt="Slide 3">
+        <div class="slide-text">
+          <h1>Commissioned Artwork</h1>
+          <p>Get your own personalized piece made with love and stardust.</p>
+          <a class="btn-ghost" href="#commissions">Request</a>
+        </div>
+      </div>
 
-<!-- FOOTER -->
-<footer>
-  <nav>
-    <ul>
-      <li>Home</li><li>Products</li><li>Commissions</li><li>Contact</li>
-    </ul>
-  </nav>
-  <p>© 2025 Magical Boutique. All rights reserved.</p>
-</footer>
+      <button class="slide-nav left" id="slidePrev">‹</button>
+      <button class="slide-nav right" id="slideNext">›</button>
+      <div class="dots" id="heroDots"></div>
+    </div>
+  </section>
 
-<!-- AUDIO -->
-<audio id="clickSound" src="assets/sounds/click.mp3"></audio>
-<audio id="addSound" src="assets/sounds/add.mp3"></audio>
+  <!-- ARTWORK ROW (cards & recent search) -->
+  <section id="artwork" class="artwork-section">
+    <div class="art-left">
+      <h2>Artwork</h2>
+      <div class="art-cards" id="artCards">
+        <!-- JS will inject cards -->
+      </div>
+      <button class="view-more">View More</button>
+    </div>
 
-<script src="app.js"></script>
+    <aside class="art-right">
+      <h3>Recent Search</h3>
+      <div class="recent-search" id="recentSearch">
+        <!-- list injected by JS -->
+      </div>
+    </aside>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products" class="products">
+    <h2>Featured Products</h2>
+    <div id="productGrid" class="product-grid">
+      <!-- JS-inserted product cards -->
+    </div>
+  </section>
+
+  <!-- COMMISSIONS -->
+  <section id="commissions" class="commissions">
+    <h2>Art Commissions</h2>
+    <div class="commission-samples" id="commissionSamples">
+      <!-- JS inserts 3 placeholders -->
+    </div>
+
+    <form id="commissionForm" class="commission-form">
+      <input name="email" type="email" placeholder="Your email" required>
+      <select name="type">
+        <option>Portrait</option>
+        <option>Character</option>
+        <option>Illustration</option>
+      </select>
+      <textarea name="details" placeholder="Tell us what you want..." required></textarea>
+      <input name="budget" type="number" placeholder="Budget ($)">
+      <button type="submit" class="cta">Request Quote</button>
+    </form>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews" class="reviews">
+    <h2>What People Say</h2>
+    <div id="reviewList" class="review-list"></div>
+    <div class="write-review">
+      <input id="reviewAuthor" placeholder="Your name">
+      <input id="reviewText" placeholder="Write a review...">
+      <button id="postReview">Post</button>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER / LEAD MAGNET -->
+  <section id="contact" class="lead-magnet">
+    <h3>Download your freebie</h3>
+    <p>Join our circle for exclusive wallpapers & offers ✨</p>
+    <form id="signupForm" class="signup">
+      <input id="signupEmail" type="email" placeholder="Your email" required>
+      <button type="submit" class="cta">Subscribe</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="foot-left">© 2025 Layla Boutique</div>
+    <nav class="foot-nav">
+      <a href="#home">Home</a>
+      <a href="#products">Products</a>
+      <a href="#commissions">Commissions</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </footer>
+
+  <!-- LOGIN MODAL (simple frontend demo) -->
+  <dialog id="loginModal" class="modal">
+    <form id="loginForm">
+      <h3>Welcome back ✨</h3>
+      <input name="email" type="email" placeholder="Email" required>
+      <input name="password" type="password" placeholder="Password" required>
+      <div class="socials">
+        <button type="button" data-provider="google" class="oauth">Continue with Google</button>
+        <button type="button" data-provider="facebook" class="oauth">Continue with Facebook</button>
+        <button type="button" data-provider="apple" class="oauth">Continue with Apple</button>
+      </div>
+      <div class="modal-actions">
+        <button type="submit" class="cta">Login</button>
+        <button type="button" id="closeLogin">Cancel</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- AUDIO (place files in assets/sounds/) -->
+  <audio id="sClick" src="assets/sounds/click.mp3"></audio>
+  <audio id="sAdd" src="assets/sounds/add.mp3"></audio>
+  <audio id="sSpark" src="assets/sounds/sparkle.mp3"></audio>
+
+  <script src="app.js"></script>
 </body>
 </html>

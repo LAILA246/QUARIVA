@@ -1,19 +1,20 @@
-/* Layla Boutique — frontend + Firebase Auth integration */
+/* Layla Boutique — frontend + Firebase Auth (ES Modules) */
 
-// --- FIREBASE CONFIG ---
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
-};
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
+import { 
+  getAuth, 
+  signInWithEmailAndPassword, 
+  createUserWithEmailAndPassword, 
+  signInWithPopup, 
+  GoogleAuthProvider, 
+  RecaptchaVerifier, 
+  signInWithPhoneNumber, 
+  onAuthStateChanged 
+} from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
-// --- AUTH PROVIDERS ---
-const googleProvider = new firebase.auth.GoogleAuthProvider();
+const auth = window.fbAuth;
+const googleProvider = window.googleProvider;
+
+// --- MODAL ELEMENTS ---
 const loginModal = document.getElementById('loginModal');
 const signupModal = document.getElementById('signupModal');
 
@@ -25,68 +26,67 @@ document.getElementById('signupBtn').addEventListener('click', () => signupModal
 document.getElementById('closeSignup').addEventListener('click', () => signupModal.close());
 
 // --- EMAIL/PASSWORD LOGIN ---
-document.getElementById('loginForm').addEventListener('submit', e => {
+document.getElementById('loginForm').addEventListener('submit', async e => {
   e.preventDefault();
-  const email = new FormData(e.target).get('email');
-  const password = new FormData(e.target).get('password');
+  const email = e.target.email.value;
+  const password = e.target.password.value;
 
-  auth.signInWithEmailAndPassword(email, password)
-    .then(userCredential => {
-      alert(`Logged in as ${userCredential.user.email} ✨`);
-      loginModal.close();
-    })
-    .catch(err => alert(err.message));
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    alert(`Logged in as ${userCredential.user.email} ✨`);
+    loginModal.close();
+  } catch(err) {
+    alert(err.message);
+  }
 });
 
 // --- EMAIL/PASSWORD SIGNUP ---
-document.getElementById('signupFormModal').addEventListener('submit', e => {
+document.getElementById('signupFormModal').addEventListener('submit', async e => {
   e.preventDefault();
-  const email = new FormData(e.target).get('email');
-  const password = new FormData(e.target).get('password');
+  const email = e.target.email.value;
+  const password = e.target.password.value;
 
-  auth.createUserWithEmailAndPassword(email, password)
-    .then(userCredential => {
-      alert(`Account created! Logged in as ${userCredential.user.email} ✨`);
-      signupModal.close();
-    })
-    .catch(err => alert(err.message));
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    alert(`Account created! Logged in as ${userCredential.user.email} ✨`);
+    signupModal.close();
+  } catch(err) {
+    alert(err.message);
+  }
 });
 
 // --- GOOGLE LOGIN ---
-document.querySelector('[data-provider="google"]').addEventListener('click', () => {
-  auth.signInWithPopup(googleProvider)
-    .then(result => {
-      const user = result.user;
-      alert(`Signed in as ${user.displayName || user.email} via Google ✨`);
-      loginModal.close();
-    })
-    .catch(err => alert(err.message));
+document.querySelector('[data-provider="google"]').addEventListener('click', async () => {
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+    alert(`Signed in as ${result.user.displayName || result.user.email} via Google ✨`);
+    loginModal.close();
+  } catch(err) {
+    alert(err.message);
+  }
 });
 
-// --- PHONE LOGIN (Firebase Recaptcha + verification) ---
-document.getElementById('phoneBtn').addEventListener('click', () => {
-  const phone = prompt("Enter your phone number (with country code, e.g. +1234567890):");
+// --- PHONE LOGIN ---
+document.getElementById('phoneBtn').addEventListener('click', async () => {
+  const phone = prompt("Enter your phone number with country code (e.g. +1234567890):");
   if (!phone) return;
 
-  window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('phoneBtn', {
-    size: 'invisible',
-    callback: (response) => { /* recaptcha solved */ }
-  });
+  window.recaptchaVerifier = new RecaptchaVerifier('phoneBtn', { size: 'invisible' }, auth);
 
-  auth.signInWithPhoneNumber(phone, window.recaptchaVerifier)
-    .then(confirmationResult => {
-      const code = prompt("Enter the verification code sent to your phone:");
-      return confirmationResult.confirm(code);
-    })
-    .then(result => {
-      alert(`Signed in as ${result.user.phoneNumber} ✨`);
-      loginModal.close();
-    })
-    .catch(err => alert(err.message));
+  try {
+    const confirmationResult = await signInWithPhoneNumber(auth, phone, window.recaptchaVerifier);
+    const code = prompt("Enter the verification code sent to your phone:");
+    if (!code) return;
+    const result = await confirmationResult.confirm(code);
+    alert(`Signed in as ${result.user.phoneNumber} ✨`);
+    loginModal.close();
+  } catch(err) {
+    alert(err.message);
+  }
 });
 
-// --- AUTH STATE CHANGE ---
-auth.onAuthStateChanged(user => {
+// --- AUTH STATE MONITOR ---
+onAuthStateChanged(auth, user => {
   if (user) {
     document.getElementById('loginBtn').style.display = 'none';
     document.getElementById('signupBtn').style.display = 'none';

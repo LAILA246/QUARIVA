@@ -5,10 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>✨ Layla Boutique — Magical UI</title>
   <link rel="stylesheet" href="style.css">
-  
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-auth-compat.js"></script>
 </head>
 <body>
   <!-- SIDE NAV -->
@@ -44,8 +40,8 @@
     </div>
   </header>
 
-  <!-- HERO, Artwork, Products, Commissions, Reviews, Contact, Footer -->
-  <!-- Use your existing sections for slider, products, commissions, reviews, newsletter -->
+  <!-- HERO, ARTWORK, PRODUCTS, COMMISSIONS, REVIEWS, CONTACT, FOOTER -->
+  <!-- (keep your existing sections here as before) -->
 
   <!-- LOGIN MODAL -->
   <dialog id="loginModal" class="modal">
@@ -53,14 +49,12 @@
       <h3>Welcome back ✨</h3>
       <input name="email" type="email" placeholder="Email" required>
       <input name="password" type="password" placeholder="Password" required>
-      <div class="oauth-buttons">
-        <button type="button" data-provider="google" class="oauth">Continue with Google</button>
-        <button type="button" id="phoneBtn" class="oauth">Continue with Phone</button>
-      </div>
       <div class="modal-actions">
         <button type="submit" class="cta">Login</button>
         <button type="button" id="closeLogin">Cancel</button>
       </div>
+      <button type="button" data-provider="google">Continue with Google</button>
+      <button type="button" id="phoneBtn">Login with Phone</button>
     </form>
   </dialog>
 
@@ -82,6 +76,33 @@
   <audio id="sAdd" src="assets/sounds/add.mp3"></audio>
   <audio id="sSpark" src="assets/sounds/sparkle.mp3"></audio>
 
-  <script src="app.js"></script>
+  <!-- FIREBASE MODULE + APP JS -->
+  <script type="module">
+    // Firebase SDK imports
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, RecaptchaVerifier, signInWithPhoneNumber, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyB6xuO0ysrPeQPWzbQ7L2tydBZpUB3smsk",
+      authDomain: "quariva-4db17.firebaseapp.com",
+      projectId: "quariva-4db17",
+      storageBucket: "quariva-4db17.firebasestorage.app",
+      messagingSenderId: "366589279750",
+      appId: "1:366589279750:web:963d008197a7db8f728d87",
+      measurementId: "G-87ZYEHPNC8"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+    const googleProvider = new GoogleAuthProvider();
+
+    // Export auth for app.js module (optional)
+    window.fbAuth = auth;
+    window.googleProvider = googleProvider;
+  </script>
+
+  <script type="module" src="app.js"></script>
 </body>
 </html>

@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>✨ Layla Boutique — Magical UI</title>
   <link rel="stylesheet" href="style.css">
+
+  <!-- Firebase SDKs -->
+  <script type="module" src="app.js"></script>
 </head>
 <body>
   <!-- SIDE NAV -->
@@ -12,7 +15,7 @@
     <ul>
       <li><a href="#home">Home</a></li>
       <li><a href="#artwork">Artwork</a></li>
-      <li><a href="#products">Products</a></li>
+      <li><a href="#products">Shop</a></li>
       <li><a href="#commissions">Commissions</a></li>
       <li><a href="#reviews">Reviews</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -25,6 +28,7 @@
       <button id="menuToggle" class="icon-btn">☰</button>
       <div class="logo">Layla Boutique</div>
     </div>
+
     <div class="center">
       <nav class="top-links">
         <a href="#home">Home</a>
@@ -32,6 +36,7 @@
         <a href="#products">Shop</a>
       </nav>
     </div>
+
     <div class="right">
       <button id="searchOpen" class="icon-btn">🔍</button>
       <button id="loginBtn" class="pill">Log in</button>
@@ -40,33 +45,131 @@
     </div>
   </header>
 
-  <!-- HERO, ARTWORK, PRODUCTS, COMMISSIONS, REVIEWS, CONTACT, FOOTER -->
-  <!-- (keep your existing sections here as before) -->
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="hero-slider" id="heroSlider">
+      <div class="slide active">
+        <img src="/mnt/data/Layla Ui design 702.jpg" alt="Layla hero">
+        <div class="slide-text">
+          <h1>Layla</h1>
+          <p>She is a student in the Rtawahist Darshan, specializing in Theoretical Astrology.</p>
+          <a class="btn-ghost" href="#commissions">Read More</a>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="assets/images/slide2-placeholder.jpg" alt="Slide 2">
+        <div class="slide-text">
+          <h1>Dreamy Prints</h1>
+          <p>Limited edition prints — soft hues, vivid magic.</p>
+          <a class="btn-ghost" href="#products">Explore</a>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="assets/images/slide3-placeholder.jpg" alt="Slide 3">
+        <div class="slide-text">
+          <h1>Commissioned Artwork</h1>
+          <p>Get your own personalized piece made with love and stardust.</p>
+          <a class="btn-ghost" href="#commissions">Request</a>
+        </div>
+      </div>
+      <button class="slide-nav left" id="slidePrev">‹</button>
+      <button class="slide-nav right" id="slideNext">›</button>
+      <div class="dots" id="heroDots"></div>
+    </div>
+  </section>
 
-  <!-- LOGIN MODAL -->
+  <!-- ARTWORK -->
+  <section id="artwork" class="artwork-section">
+    <div class="art-left">
+      <h2>Artwork</h2>
+      <div class="art-cards" id="artCards"></div>
+      <button class="view-more">View More</button>
+    </div>
+    <aside class="art-right">
+      <h3>Recent Search</h3>
+      <div class="recent-search" id="recentSearch"></div>
+    </aside>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products" class="products">
+    <h2>Featured Products</h2>
+    <div id="productGrid" class="product-grid"></div>
+  </section>
+
+  <!-- COMMISSIONS -->
+  <section id="commissions" class="commissions">
+    <h2>Art Commissions</h2>
+    <div class="commission-samples" id="commissionSamples"></div>
+    <form id="commissionForm" class="commission-form">
+      <input name="email" type="email" placeholder="Your email" required>
+      <select name="type">
+        <option>Portrait</option>
+        <option>Character</option>
+        <option>Illustration</option>
+      </select>
+      <textarea name="details" placeholder="Tell us what you want..." required></textarea>
+      <input name="budget" type="number" placeholder="Budget ($)">
+      <button type="submit" class="cta">Request Quote</button>
+    </form>
+  </section>
+
+  <!-- REVIEWS -->
+  <section id="reviews" class="reviews">
+    <h2>What People Say</h2>
+    <div id="reviewList" class="review-list"></div>
+    <div class="write-review">
+      <input id="reviewAuthor" placeholder="Your name">
+      <input id="reviewText" placeholder="Write a review...">
+      <button id="postReview">Post</button>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section id="contact" class="lead-magnet">
+    <h3>Download your freebie</h3>
+    <p>Join our circle for exclusive wallpapers & offers ✨</p>
+    <form id="signupForm" class="signup">
+      <input id="signupEmail" type="email" placeholder="Your email" required>
+      <button type="submit" class="cta">Subscribe</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="foot-left">© 2025 Layla Boutique</div>
+    <nav class="foot-nav">
+      <a href="#home">Home</a>
+      <a href="#products">Products</a>
+      <a href="#commissions">Commissions</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </footer>
+
+  <!-- LOGIN / SIGNUP MODALS -->
   <dialog id="loginModal" class="modal">
     <form id="loginForm">
       <h3>Welcome back ✨</h3>
       <input name="email" type="email" placeholder="Email" required>
       <input name="password" type="password" placeholder="Password" required>
+      <button type="submit" class="cta">Login</button>
+      <hr>
+      <button type="button" id="googleBtn" class="cta">Continue with Google</button>
+      <button type="button" id="phoneBtn" class="cta">Login with Phone</button>
       <div class="modal-actions">
-        <button type="submit" class="cta">Login</button>
-        <button type="button" id="closeLogin">Cancel</button>
-      </div>
-      <button type="button" data-provider="google">Continue with Google</button>
-      <button type="button" id="phoneBtn">Login with Phone</button>
-    </form>
+       <button type="button" id="closeLogin">Cancel</button>
+     </div>
+  </form>
   </dialog>
 
-  <!-- SIGNUP MODAL -->
-  <dialog id="signupModal" class="modal">
+<dialog id="signupModal" class="modal">
     <form id="signupFormModal">
-      <h3>Create your account ✨</h3>
+      <h3>Create an account ✨</h3>
       <input name="email" type="email" placeholder="Email" required>
       <input name="password" type="password" placeholder="Password" required>
+      <button type="submit" class="cta">Sign Up</button>
       <div class="modal-actions">
-        <button type="submit" class="cta">Sign Up</button>
-        <button type="button" id="closeSignup">Cancel</button>
+     <button type="button" id="closeSignup">Cancel</button>
       </div>
     </form>
   </dialog>
@@ -75,34 +178,5 @@
   <audio id="sClick" src="assets/sounds/click.mp3"></audio>
   <audio id="sAdd" src="assets/sounds/add.mp3"></audio>
   <audio id="sSpark" src="assets/sounds/sparkle.mp3"></audio>
-
-  <!-- FIREBASE MODULE + APP JS -->
-  <script type="module">
-    // Firebase SDK imports
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
-    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, RecaptchaVerifier, signInWithPhoneNumber, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyB6xuO0ysrPeQPWzbQ7L2tydBZpUB3smsk",
-      authDomain: "quariva-4db17.firebaseapp.com",
-      projectId: "quariva-4db17",
-      storageBucket: "quariva-4db17.firebasestorage.app",
-      messagingSenderId: "366589279750",
-      appId: "1:366589279750:web:963d008197a7db8f728d87",
-      measurementId: "G-87ZYEHPNC8"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-    const auth = getAuth(app);
-    const googleProvider = new GoogleAuthProvider();
-
-    // Export auth for app.js module (optional)
-    window.fbAuth = auth;
-    window.googleProvider = googleProvider;
-  </script>
-
-  <script type="module" src="app.js"></script>
 </body>
 </html>

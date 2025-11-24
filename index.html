@@ -29,7 +29,6 @@
       <button id="menuToggle" class="icon-btn">☰</button>
       <div class="logo">Layla Boutique</div>
     </div>
-
     <div class="center">
       <nav class="top-links">
         <a href="#home">Home</a>
@@ -37,7 +36,6 @@
         <a href="#products">Shop</a>
       </nav>
     </div>
-
     <div class="right">
       <button id="searchOpen" class="icon-btn">🔍</button>
       <button id="loginBtn" class="pill">Log in</button>
@@ -45,6 +43,9 @@
       <button id="cartBtn" class="icon-btn">🛒 <span id="cartCount">0</span></button>
     </div>
   </header>
+
+  <!-- HERO, Artwork, Products, Commissions, Reviews, Contact, Footer -->
+  <!-- Use your existing sections for slider, products, commissions, reviews, newsletter -->
 
   <!-- LOGIN MODAL -->
   <dialog id="loginModal" class="modal">
@@ -54,10 +55,24 @@
       <input name="password" type="password" placeholder="Password" required>
       <div class="oauth-buttons">
         <button type="button" data-provider="google" class="oauth">Continue with Google</button>
+        <button type="button" id="phoneBtn" class="oauth">Continue with Phone</button>
       </div>
       <div class="modal-actions">
         <button type="submit" class="cta">Login</button>
         <button type="button" id="closeLogin">Cancel</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- SIGNUP MODAL -->
+  <dialog id="signupModal" class="modal">
+    <form id="signupFormModal">
+      <h3>Create your account ✨</h3>
+      <input name="email" type="email" placeholder="Email" required>
+      <input name="password" type="password" placeholder="Password" required>
+      <div class="modal-actions">
+        <button type="submit" class="cta">Sign Up</button>
+        <button type="button" id="closeSignup">Cancel</button>
       </div>
     </form>
   </dialog>
@@ -67,7 +82,6 @@
   <audio id="sAdd" src="assets/sounds/add.mp3"></audio>
   <audio id="sSpark" src="assets/sounds/sparkle.mp3"></audio>
 
-  <!-- Your JS -->
   <script src="app.js"></script>
 </body>
 </html>

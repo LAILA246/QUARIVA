@@ -1,4 +1,4 @@
-/* Magical Boutique — frontend + Firebase Auth integration */
+/* Layla Boutique — frontend + Firebase Auth integration */
 
 // --- FIREBASE CONFIG ---
 const firebaseConfig = {
@@ -15,16 +15,21 @@ const auth = firebase.auth();
 // --- AUTH PROVIDERS ---
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 const loginModal = document.getElementById('loginModal');
+const signupModal = document.getElementById('signupModal');
 
-// Open/close login modal
+// --- MODAL OPEN/CLOSE ---
 document.getElementById('loginBtn').addEventListener('click', () => loginModal.showModal());
 document.getElementById('closeLogin').addEventListener('click', () => loginModal.close());
 
-// Email/Password Login
+document.getElementById('signupBtn').addEventListener('click', () => signupModal.showModal());
+document.getElementById('closeSignup').addEventListener('click', () => signupModal.close());
+
+// --- EMAIL/PASSWORD LOGIN ---
 document.getElementById('loginForm').addEventListener('submit', e => {
   e.preventDefault();
   const email = new FormData(e.target).get('email');
   const password = new FormData(e.target).get('password');
+
   auth.signInWithEmailAndPassword(email, password)
     .then(userCredential => {
       alert(`Logged in as ${userCredential.user.email} ✨`);
@@ -33,19 +38,21 @@ document.getElementById('loginForm').addEventListener('submit', e => {
     .catch(err => alert(err.message));
 });
 
-// Email/Password Signup
-document.getElementById('signupBtn').addEventListener('click', () => {
-  const email = prompt("Enter your email:");
-  const password = prompt("Enter a password:");
-  if (!email || !password) return alert("Email & password required");
+// --- EMAIL/PASSWORD SIGNUP ---
+document.getElementById('signupFormModal').addEventListener('submit', e => {
+  e.preventDefault();
+  const email = new FormData(e.target).get('email');
+  const password = new FormData(e.target).get('password');
+
   auth.createUserWithEmailAndPassword(email, password)
     .then(userCredential => {
       alert(`Account created! Logged in as ${userCredential.user.email} ✨`);
+      signupModal.close();
     })
     .catch(err => alert(err.message));
 });
 
-// Google Login
+// --- GOOGLE LOGIN ---
 document.querySelector('[data-provider="google"]').addEventListener('click', () => {
   auth.signInWithPopup(googleProvider)
     .then(result => {
@@ -56,12 +63,34 @@ document.querySelector('[data-provider="google"]').addEventListener('click', () 
     .catch(err => alert(err.message));
 });
 
-// Hide/show login/signup buttons based on auth state
+// --- PHONE LOGIN (Firebase Recaptcha + verification) ---
+document.getElementById('phoneBtn').addEventListener('click', () => {
+  const phone = prompt("Enter your phone number (with country code, e.g. +1234567890):");
+  if (!phone) return;
+
+  window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('phoneBtn', {
+    size: 'invisible',
+    callback: (response) => { /* recaptcha solved */ }
+  });
+
+  auth.signInWithPhoneNumber(phone, window.recaptchaVerifier)
+    .then(confirmationResult => {
+      const code = prompt("Enter the verification code sent to your phone:");
+      return confirmationResult.confirm(code);
+    })
+    .then(result => {
+      alert(`Signed in as ${result.user.phoneNumber} ✨`);
+      loginModal.close();
+    })
+    .catch(err => alert(err.message));
+});
+
+// --- AUTH STATE CHANGE ---
 auth.onAuthStateChanged(user => {
   if (user) {
     document.getElementById('loginBtn').style.display = 'none';
     document.getElementById('signupBtn').style.display = 'none';
-    console.log("User logged in:", user.email);
+    console.log("User logged in:", user.email || user.phoneNumber);
   } else {
     document.getElementById('loginBtn').style.display = 'inline-block';
     document.getElementById('signupBtn').style.display = 'inline-block';
@@ -69,7 +98,7 @@ auth.onAuthStateChanged(user => {
   }
 });
 
-// --- EXISTING BOUTIQUE CODE BELOW ---
+// --- EXISTING BOUTIQUE CODE ---
 // Sounds
 const sClick = document.getElementById('sClick');
 const sAdd = document.getElementById('sAdd');
@@ -162,7 +191,7 @@ document.getElementById('postReview').addEventListener('click',()=>{
 loadReviews();
 
 // SIGNUP/NEWSLETTER
-document.getElementById('signupForm').addEventListener('submit',e=>{
+document.getElementById('signupForm')?.addEventListener('submit',e=>{
   e.preventDefault();
   const email=document.getElementById('signupEmail').value;
   play(sSpark); alert(`Thank you! ${email} has been subscribed ✨`);
